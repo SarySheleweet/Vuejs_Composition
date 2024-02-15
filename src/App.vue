@@ -12,8 +12,8 @@ function getRandomColor() {
 }
 
 const addNote = () => {
-  if(newNote.value.length <= 10) {
-    return errorMessage;
+  if(newNote.value.trim.length <= 10) {
+    return errorMessage.value = "Note needs to be more than 10 char";
   }
   notes.value.push({
     id: Math.floor(Math.random() * 100000),
@@ -22,7 +22,8 @@ const addNote = () => {
     date: new Date()
   })
   showModal.value = false;
-  newNote.value = ""
+  newNote.value = "";
+  errorMessage.value = "";
 }
 </script>
 
@@ -30,10 +31,10 @@ const addNote = () => {
   <main>
     <div v-if="showModal" class="overlay">
       <div class="modal">
-        <textarea v-model="newNote" name="note" id="note" cols="30" rows="10"/>
+        <textarea v-model="newNote" name="note" id="note" cols="30" rows="10"></textarea>
         <p v-if="errorMessage"> {{ errorMessage }}</p>
         <button @click="addNote">Add Note</button>
-        <button class="close" @click="showModal = false">Close</button>
+        <button class="close" id="close" @click="showModal = false">Close</button>
       </div>
     </div>
     <div class="container">
@@ -62,6 +63,10 @@ const addNote = () => {
     font-weight: bold;
     margin-bottom: 25px;
     font-size: 75px;
+  }
+  
+#close {
+   background-color: rgb(35, 46, 67);
   }
 
   .card {
@@ -152,10 +157,10 @@ const addNote = () => {
   }
 
   .modal p {
-    margin-left: auto;
     font-size: 20px;
     z-index: 100000;
     cursor: pointer;
+    color: darkred;
   }
 
   textarea {
