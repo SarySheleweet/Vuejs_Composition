@@ -12,7 +12,7 @@ function getRandomColor() {
 }
 
 const addNote = () => {
-  if(newNote.value.trim.length <= 10) {
+  if(newNote.value.trim().length < 10) {
     return errorMessage.value = "Note needs to be more than 10 char";
   }
   notes.value.push({
